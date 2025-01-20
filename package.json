@@ -1,0 +1,14 @@
+{
+    "name": "hexo-shokax-sycamore",
+    "version": "0.1.0",
+    "description": "hexo-shokaX 主题页脚样式自定义",
+    "author": "Sycamore",
+    "main": "footer-addon.js",
+    "license": "MIT",
+    "keywords": ["hexo", "shokaX"],
+    "repository": {
+        "type": "git",
+        "url": "git+http://github.com/zixu0779/hexo-shokax-sycamore.git"
+    },
+    "homepage": "https://github.com/zixu0779/hexo-shokax-sycamore#readme"
+}

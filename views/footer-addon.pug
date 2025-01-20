@@ -1,0 +1,60 @@
+script.
+    const authorSpan = document.querySelector('span.author[itemprop="copyrightHolder"]');
+    if (authorSpan) {
+        authorSpan.textContent = 'Sycamore';
+    }
+    const spanElement = document.querySelector('span[title="站点阅读时长"]');
+    if (spanElement) {
+        spanElement.textContent = " " + spanElement.textContent
+    }
+
+
+script(src='https://unpkg.com/busuanzi@2.3.0/bsz.pure.mini.js')
+div(style="width: 100%;text-align:center;")
+    if !theme.busuanzi || theme.busuanzi.pv.enable
+        span(class='ic i-eye')
+        span(id="busuanzi_container_site_pv")
+            != (theme.busuanzi && theme.busuanzi.pv.title) || '本站访问量'
+            != ' '
+            span(id="busuanzi_value_site_pv")
+            != ' '
+            != (theme.busuanzi && theme.busuanzi.pv.quantifier) || '次'
+    if !theme.busuanzi || (theme.busuanzi.pv.enable && theme.busuanzi.uv.enable)
+        != ' | '
+    if !theme.busuanzi || theme.busuanzi.uv.enable
+        span(class='ic i-user')
+        span(id="busuanzi_container_site_uv")
+            != (theme.busuanzi && theme.busuanzi.uv.title) || '本站访客量'
+            != ' '
+            span(id="busuanzi_value_site_uv")
+            != ' '
+            != (theme.busuanzi && theme.busuanzi.uv.quantifier) || '次'
+    != ' | '
+    if theme.livingtime.enable
+        span(id="time")
+script.
+    function createtime() {
+        const n = new Date("#{theme.livingtime.createTime}");
+        now.setTime(now.getTime() + 250), days = (now - n) / 1e3 / 60 / 60 / 24, dnum = Math.floor(days), hours = (now - n) / 1e3 / 60 / 60 - 24 * dnum, hnum = Math.floor(hours), 1 == String(hnum).length && (hnum = "0" + hnum), minutes = (now - n) / 1e3 / 60 - 1440 * dnum - 60 * hnum, mnum = Math.floor(minutes), 1 == String(mnum).length && (mnum = "0" + mnum), seconds = (now - n) / 1e3 - 86400 * dnum - 3600 * hnum - 60 * mnum, snum = Math.round(seconds), 1 == String(snum).length && (snum = "0" + snum), document.getElementById("time").innerHTML = "此站已存活" + dnum + " 天 " + hnum + " 小时 " + mnum + " 分 " + snum + " 秒"
+    }
+    const now = new Date;
+    setInterval("createtime()", 250)
+
+if theme.hitokoto
+    div(style="width: 100%;text-align:center;")
+        span(id="sentences-content", style="color: #ebb563;")
+            != '一言...'
+    div(style="width: 100%;text-align:center;")
+        span(id="sentences-from")
+            != '來源'
+        script(type="text/javascript").
+            fetch(`https://v1.hitokoto.cn/`)
+            .then(response => response.json())
+            .then(data => {
+                var content = document.getElementById('sentences-content');
+                content.innerText = data.hitokoto
+                var from = document.getElementById('sentences-from');
+                from.innerText = data.from + (data.from_who && data.from_who != data.from ? ' · ' + data.from_who : '')
+            })
+            .catch(console.error)
+
