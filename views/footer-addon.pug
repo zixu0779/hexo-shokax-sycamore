@@ -33,7 +33,8 @@ div(style="width: 100%;text-align:center;")
             span(id="busuanzi_value_site_uv")
             != ' '
             != (theme.busuanzi && theme.busuanzi.uv.quantifier) || '次'
-    != ' | '
+    if theme.busuanzi.pv.enable || theme.busuanzi.uv.enable
+        != ' | '
     if theme.livingtime.enable
         span(id="time")
 script.
